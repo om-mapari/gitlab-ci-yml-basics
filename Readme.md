@@ -2951,3 +2951,3512 @@ test_job:
 - **Specific Runners**  are dedicated to individual projects or groups, offering more customization and security.
 
 - Jobs are picked up by runners based on tags, project assignment, and runner availability, allowing for flexible and scalable job execution.
+
+You: 
+
+explain artifacts in job
+
+ChatGPT: 
+
+**Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+Defining Artifacts in `.gitlab-ci.yml`** You define artifacts in a job by using the `artifacts` keyword within the job configuration. You specify which files or directories should be preserved.
+### Basic Example: 
+
+
+```yaml
+stages:
+  - build
+  - test
+
+build_job:
+  stage: build
+  script:
+    - echo "Compiling the code"
+    - mkdir dist
+    - touch dist/my_app
+  artifacts:
+    paths:
+      - dist/
+
+test_job:
+  stage: test
+  script:
+    - echo "Running tests on the built app"
+    - ls dist/
+```
+
+#### In this example: 
+ 
+- **`build_job`** : This job compiles code and produces a file in the `dist/` directory. 
+  - The `artifacts` keyword specifies that everything in the `dist/` directory should be preserved as an artifact.
+ 
+- **`test_job`** : This job runs in the `test` stage and relies on the output (`dist/my_app`) from the `build_job`. Since the `dist/` directory was saved as an artifact, the `test_job` has access to the files created in the `build_job`.
+
+
+---
+
+**Artifact Configuration Options** 
+You can fine-tune the behavior of artifacts using various options:
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+Defining Artifacts in `.gitlab-ci.yml`** You define artifacts in a job by using the `artifacts` keyword within the job configuration. You specify which files or directories should be preserved.
+### Basic Example: 
+
+
+```yaml
+stages:
+  - build
+  - test
+
+build_job:
+  stage: build
+  script:
+    - echo "Compiling the code"
+    - mkdir dist
+    - touch dist/my_app
+  artifacts:
+    paths:
+      - dist/
+
+test_job:
+  stage: test
+  script:
+    - echo "Running tests on the built app"
+    - ls dist/
+```
+
+#### In this example: 
+ 
+- **`build_job`** : This job compiles code and produces a file in the `dist/` directory. 
+  - The `artifacts` keyword specifies that everything in the `dist/` directory should be preserved as an artifact.
+ 
+- **`test_job`** : This job runs in the `test` stage and relies on the output (`dist/my_app`) from the `build_job`. Since the `dist/` directory was saved as an artifact, the `test_job` has access to the files created in the `build_job`.
+
+
+---
+
+**Artifact Configuration Options** 
+You can fine-tune the behavior of artifacts using various options:
+1. `paths`:** 
+The most common option, it defines the files or directories you want to save as artifacts.
+
+
+```yaml
+artifacts:
+  paths:
+    - dist/
+    - logs/output.log
+```
+This example saves the `dist/` directory and the `logs/output.log` file as artifacts.****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+Defining Artifacts in `.gitlab-ci.yml`** You define artifacts in a job by using the `artifacts` keyword within the job configuration. You specify which files or directories should be preserved.
+### Basic Example: 
+
+
+```yaml
+stages:
+  - build
+  - test
+
+build_job:
+  stage: build
+  script:
+    - echo "Compiling the code"
+    - mkdir dist
+    - touch dist/my_app
+  artifacts:
+    paths:
+      - dist/
+
+test_job:
+  stage: test
+  script:
+    - echo "Running tests on the built app"
+    - ls dist/
+```
+
+#### In this example: 
+ 
+- **`build_job`** : This job compiles code and produces a file in the `dist/` directory. 
+  - The `artifacts` keyword specifies that everything in the `dist/` directory should be preserved as an artifact.
+ 
+- **`test_job`** : This job runs in the `test` stage and relies on the output (`dist/my_app`) from the `build_job`. Since the `dist/` directory was saved as an artifact, the `test_job` has access to the files created in the `build_job`.
+
+
+---
+
+**Artifact Configuration Options** 
+You can fine-tune the behavior of artifacts using various options:
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+Defining Artifacts in `.gitlab-ci.yml`** You define artifacts in a job by using the `artifacts` keyword within the job configuration. You specify which files or directories should be preserved.
+### Basic Example: 
+
+
+```yaml
+stages:
+  - build
+  - test
+
+build_job:
+  stage: build
+  script:
+    - echo "Compiling the code"
+    - mkdir dist
+    - touch dist/my_app
+  artifacts:
+    paths:
+      - dist/
+
+test_job:
+  stage: test
+  script:
+    - echo "Running tests on the built app"
+    - ls dist/
+```
+
+#### In this example: 
+ 
+- **`build_job`** : This job compiles code and produces a file in the `dist/` directory. 
+  - The `artifacts` keyword specifies that everything in the `dist/` directory should be preserved as an artifact.
+ 
+- **`test_job`** : This job runs in the `test` stage and relies on the output (`dist/my_app`) from the `build_job`. Since the `dist/` directory was saved as an artifact, the `test_job` has access to the files created in the `build_job`.
+
+
+---
+
+**Artifact Configuration Options** 
+You can fine-tune the behavior of artifacts using various options:
+1. `paths`:** 
+The most common option, it defines the files or directories you want to save as artifacts.
+
+
+```yaml
+artifacts:
+  paths:
+    - dist/
+    - logs/output.log
+```
+This example saves the `dist/` directory and the `logs/output.log` file as artifacts.2. `expire_in`:** 
+By default, artifacts are kept indefinitely, but you can set an expiration time after which GitLab automatically removes them.
+
+
+```yaml
+artifacts:
+  paths:
+    - dist/
+  expire_in: 1 week
+```
+
+In this case, artifacts will expire after 1 week.
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+Defining Artifacts in `.gitlab-ci.yml`** You define artifacts in a job by using the `artifacts` keyword within the job configuration. You specify which files or directories should be preserved.
+### Basic Example: 
+
+
+```yaml
+stages:
+  - build
+  - test
+
+build_job:
+  stage: build
+  script:
+    - echo "Compiling the code"
+    - mkdir dist
+    - touch dist/my_app
+  artifacts:
+    paths:
+      - dist/
+
+test_job:
+  stage: test
+  script:
+    - echo "Running tests on the built app"
+    - ls dist/
+```
+
+#### In this example: 
+ 
+- **`build_job`** : This job compiles code and produces a file in the `dist/` directory. 
+  - The `artifacts` keyword specifies that everything in the `dist/` directory should be preserved as an artifact.
+ 
+- **`test_job`** : This job runs in the `test` stage and relies on the output (`dist/my_app`) from the `build_job`. Since the `dist/` directory was saved as an artifact, the `test_job` has access to the files created in the `build_job`.
+
+
+---
+
+**Artifact Configuration Options** 
+You can fine-tune the behavior of artifacts using various options:
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+Defining Artifacts in `.gitlab-ci.yml`** You define artifacts in a job by using the `artifacts` keyword within the job configuration. You specify which files or directories should be preserved.
+### Basic Example: 
+
+
+```yaml
+stages:
+  - build
+  - test
+
+build_job:
+  stage: build
+  script:
+    - echo "Compiling the code"
+    - mkdir dist
+    - touch dist/my_app
+  artifacts:
+    paths:
+      - dist/
+
+test_job:
+  stage: test
+  script:
+    - echo "Running tests on the built app"
+    - ls dist/
+```
+
+#### In this example: 
+ 
+- **`build_job`** : This job compiles code and produces a file in the `dist/` directory. 
+  - The `artifacts` keyword specifies that everything in the `dist/` directory should be preserved as an artifact.
+ 
+- **`test_job`** : This job runs in the `test` stage and relies on the output (`dist/my_app`) from the `build_job`. Since the `dist/` directory was saved as an artifact, the `test_job` has access to the files created in the `build_job`.
+
+
+---
+
+**Artifact Configuration Options** 
+You can fine-tune the behavior of artifacts using various options:
+1. `paths`:** 
+The most common option, it defines the files or directories you want to save as artifacts.
+
+
+```yaml
+artifacts:
+  paths:
+    - dist/
+    - logs/output.log
+```
+This example saves the `dist/` directory and the `logs/output.log` file as artifacts.****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+Defining Artifacts in `.gitlab-ci.yml`** You define artifacts in a job by using the `artifacts` keyword within the job configuration. You specify which files or directories should be preserved.
+### Basic Example: 
+
+
+```yaml
+stages:
+  - build
+  - test
+
+build_job:
+  stage: build
+  script:
+    - echo "Compiling the code"
+    - mkdir dist
+    - touch dist/my_app
+  artifacts:
+    paths:
+      - dist/
+
+test_job:
+  stage: test
+  script:
+    - echo "Running tests on the built app"
+    - ls dist/
+```
+
+#### In this example: 
+ 
+- **`build_job`** : This job compiles code and produces a file in the `dist/` directory. 
+  - The `artifacts` keyword specifies that everything in the `dist/` directory should be preserved as an artifact.
+ 
+- **`test_job`** : This job runs in the `test` stage and relies on the output (`dist/my_app`) from the `build_job`. Since the `dist/` directory was saved as an artifact, the `test_job` has access to the files created in the `build_job`.
+
+
+---
+
+**Artifact Configuration Options** 
+You can fine-tune the behavior of artifacts using various options:
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+Defining Artifacts in `.gitlab-ci.yml`** You define artifacts in a job by using the `artifacts` keyword within the job configuration. You specify which files or directories should be preserved.
+### Basic Example: 
+
+
+```yaml
+stages:
+  - build
+  - test
+
+build_job:
+  stage: build
+  script:
+    - echo "Compiling the code"
+    - mkdir dist
+    - touch dist/my_app
+  artifacts:
+    paths:
+      - dist/
+
+test_job:
+  stage: test
+  script:
+    - echo "Running tests on the built app"
+    - ls dist/
+```
+
+#### In this example: 
+ 
+- **`build_job`** : This job compiles code and produces a file in the `dist/` directory. 
+  - The `artifacts` keyword specifies that everything in the `dist/` directory should be preserved as an artifact.
+ 
+- **`test_job`** : This job runs in the `test` stage and relies on the output (`dist/my_app`) from the `build_job`. Since the `dist/` directory was saved as an artifact, the `test_job` has access to the files created in the `build_job`.
+
+
+---
+
+**Artifact Configuration Options** 
+You can fine-tune the behavior of artifacts using various options:
+1. `paths`:** 
+The most common option, it defines the files or directories you want to save as artifacts.
+
+
+```yaml
+artifacts:
+  paths:
+    - dist/
+    - logs/output.log
+```
+This example saves the `dist/` directory and the `logs/output.log` file as artifacts.2. `expire_in`:** 
+By default, artifacts are kept indefinitely, but you can set an expiration time after which GitLab automatically removes them.
+
+
+```yaml
+artifacts:
+  paths:
+    - dist/
+  expire_in: 1 week
+```
+
+In this case, artifacts will expire after 1 week.
+3. `when`:** 
+You can control when artifacts are uploaded based on the job result:
+ 
+- `on_success`: Uploads artifacts only if the job succeeds (default behavior).
+ 
+- `on_failure`: Uploads artifacts only if the job fails (e.g., useful for saving logs or debugging information).
+ 
+- `always`: Uploads artifacts regardless of whether the job succeeds or fails.
+
+
+```yaml
+artifacts:
+  paths:
+    - logs/error.log
+  when: on_failure
+```
+In this case, the `error.log` will only be uploaded if the job fails.****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+Defining Artifacts in `.gitlab-ci.yml`** You define artifacts in a job by using the `artifacts` keyword within the job configuration. You specify which files or directories should be preserved.
+### Basic Example: 
+
+
+```yaml
+stages:
+  - build
+  - test
+
+build_job:
+  stage: build
+  script:
+    - echo "Compiling the code"
+    - mkdir dist
+    - touch dist/my_app
+  artifacts:
+    paths:
+      - dist/
+
+test_job:
+  stage: test
+  script:
+    - echo "Running tests on the built app"
+    - ls dist/
+```
+
+#### In this example: 
+ 
+- **`build_job`** : This job compiles code and produces a file in the `dist/` directory. 
+  - The `artifacts` keyword specifies that everything in the `dist/` directory should be preserved as an artifact.
+ 
+- **`test_job`** : This job runs in the `test` stage and relies on the output (`dist/my_app`) from the `build_job`. Since the `dist/` directory was saved as an artifact, the `test_job` has access to the files created in the `build_job`.
+
+
+---
+
+**Artifact Configuration Options** 
+You can fine-tune the behavior of artifacts using various options:
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+Defining Artifacts in `.gitlab-ci.yml`** You define artifacts in a job by using the `artifacts` keyword within the job configuration. You specify which files or directories should be preserved.
+### Basic Example: 
+
+
+```yaml
+stages:
+  - build
+  - test
+
+build_job:
+  stage: build
+  script:
+    - echo "Compiling the code"
+    - mkdir dist
+    - touch dist/my_app
+  artifacts:
+    paths:
+      - dist/
+
+test_job:
+  stage: test
+  script:
+    - echo "Running tests on the built app"
+    - ls dist/
+```
+
+#### In this example: 
+ 
+- **`build_job`** : This job compiles code and produces a file in the `dist/` directory. 
+  - The `artifacts` keyword specifies that everything in the `dist/` directory should be preserved as an artifact.
+ 
+- **`test_job`** : This job runs in the `test` stage and relies on the output (`dist/my_app`) from the `build_job`. Since the `dist/` directory was saved as an artifact, the `test_job` has access to the files created in the `build_job`.
+
+
+---
+
+**Artifact Configuration Options** 
+You can fine-tune the behavior of artifacts using various options:
+1. `paths`:** 
+The most common option, it defines the files or directories you want to save as artifacts.
+
+
+```yaml
+artifacts:
+  paths:
+    - dist/
+    - logs/output.log
+```
+This example saves the `dist/` directory and the `logs/output.log` file as artifacts.****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+Defining Artifacts in `.gitlab-ci.yml`** You define artifacts in a job by using the `artifacts` keyword within the job configuration. You specify which files or directories should be preserved.
+### Basic Example: 
+
+
+```yaml
+stages:
+  - build
+  - test
+
+build_job:
+  stage: build
+  script:
+    - echo "Compiling the code"
+    - mkdir dist
+    - touch dist/my_app
+  artifacts:
+    paths:
+      - dist/
+
+test_job:
+  stage: test
+  script:
+    - echo "Running tests on the built app"
+    - ls dist/
+```
+
+#### In this example: 
+ 
+- **`build_job`** : This job compiles code and produces a file in the `dist/` directory. 
+  - The `artifacts` keyword specifies that everything in the `dist/` directory should be preserved as an artifact.
+ 
+- **`test_job`** : This job runs in the `test` stage and relies on the output (`dist/my_app`) from the `build_job`. Since the `dist/` directory was saved as an artifact, the `test_job` has access to the files created in the `build_job`.
+
+
+---
+
+**Artifact Configuration Options** 
+You can fine-tune the behavior of artifacts using various options:
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+Defining Artifacts in `.gitlab-ci.yml`** You define artifacts in a job by using the `artifacts` keyword within the job configuration. You specify which files or directories should be preserved.
+### Basic Example: 
+
+
+```yaml
+stages:
+  - build
+  - test
+
+build_job:
+  stage: build
+  script:
+    - echo "Compiling the code"
+    - mkdir dist
+    - touch dist/my_app
+  artifacts:
+    paths:
+      - dist/
+
+test_job:
+  stage: test
+  script:
+    - echo "Running tests on the built app"
+    - ls dist/
+```
+
+#### In this example: 
+ 
+- **`build_job`** : This job compiles code and produces a file in the `dist/` directory. 
+  - The `artifacts` keyword specifies that everything in the `dist/` directory should be preserved as an artifact.
+ 
+- **`test_job`** : This job runs in the `test` stage and relies on the output (`dist/my_app`) from the `build_job`. Since the `dist/` directory was saved as an artifact, the `test_job` has access to the files created in the `build_job`.
+
+
+---
+
+**Artifact Configuration Options** 
+You can fine-tune the behavior of artifacts using various options:
+1. `paths`:** 
+The most common option, it defines the files or directories you want to save as artifacts.
+
+
+```yaml
+artifacts:
+  paths:
+    - dist/
+    - logs/output.log
+```
+This example saves the `dist/` directory and the `logs/output.log` file as artifacts.2. `expire_in`:** 
+By default, artifacts are kept indefinitely, but you can set an expiration time after which GitLab automatically removes them.
+
+
+```yaml
+artifacts:
+  paths:
+    - dist/
+  expire_in: 1 week
+```
+
+In this case, artifacts will expire after 1 week.
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+Defining Artifacts in `.gitlab-ci.yml`** You define artifacts in a job by using the `artifacts` keyword within the job configuration. You specify which files or directories should be preserved.
+### Basic Example: 
+
+
+```yaml
+stages:
+  - build
+  - test
+
+build_job:
+  stage: build
+  script:
+    - echo "Compiling the code"
+    - mkdir dist
+    - touch dist/my_app
+  artifacts:
+    paths:
+      - dist/
+
+test_job:
+  stage: test
+  script:
+    - echo "Running tests on the built app"
+    - ls dist/
+```
+
+#### In this example: 
+ 
+- **`build_job`** : This job compiles code and produces a file in the `dist/` directory. 
+  - The `artifacts` keyword specifies that everything in the `dist/` directory should be preserved as an artifact.
+ 
+- **`test_job`** : This job runs in the `test` stage and relies on the output (`dist/my_app`) from the `build_job`. Since the `dist/` directory was saved as an artifact, the `test_job` has access to the files created in the `build_job`.
+
+
+---
+
+**Artifact Configuration Options** 
+You can fine-tune the behavior of artifacts using various options:
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+Defining Artifacts in `.gitlab-ci.yml`** You define artifacts in a job by using the `artifacts` keyword within the job configuration. You specify which files or directories should be preserved.
+### Basic Example: 
+
+
+```yaml
+stages:
+  - build
+  - test
+
+build_job:
+  stage: build
+  script:
+    - echo "Compiling the code"
+    - mkdir dist
+    - touch dist/my_app
+  artifacts:
+    paths:
+      - dist/
+
+test_job:
+  stage: test
+  script:
+    - echo "Running tests on the built app"
+    - ls dist/
+```
+
+#### In this example: 
+ 
+- **`build_job`** : This job compiles code and produces a file in the `dist/` directory. 
+  - The `artifacts` keyword specifies that everything in the `dist/` directory should be preserved as an artifact.
+ 
+- **`test_job`** : This job runs in the `test` stage and relies on the output (`dist/my_app`) from the `build_job`. Since the `dist/` directory was saved as an artifact, the `test_job` has access to the files created in the `build_job`.
+
+
+---
+
+**Artifact Configuration Options** 
+You can fine-tune the behavior of artifacts using various options:
+1. `paths`:** 
+The most common option, it defines the files or directories you want to save as artifacts.
+
+
+```yaml
+artifacts:
+  paths:
+    - dist/
+    - logs/output.log
+```
+This example saves the `dist/` directory and the `logs/output.log` file as artifacts.****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+Defining Artifacts in `.gitlab-ci.yml`** You define artifacts in a job by using the `artifacts` keyword within the job configuration. You specify which files or directories should be preserved.
+### Basic Example: 
+
+
+```yaml
+stages:
+  - build
+  - test
+
+build_job:
+  stage: build
+  script:
+    - echo "Compiling the code"
+    - mkdir dist
+    - touch dist/my_app
+  artifacts:
+    paths:
+      - dist/
+
+test_job:
+  stage: test
+  script:
+    - echo "Running tests on the built app"
+    - ls dist/
+```
+
+#### In this example: 
+ 
+- **`build_job`** : This job compiles code and produces a file in the `dist/` directory. 
+  - The `artifacts` keyword specifies that everything in the `dist/` directory should be preserved as an artifact.
+ 
+- **`test_job`** : This job runs in the `test` stage and relies on the output (`dist/my_app`) from the `build_job`. Since the `dist/` directory was saved as an artifact, the `test_job` has access to the files created in the `build_job`.
+
+
+---
+
+**Artifact Configuration Options** 
+You can fine-tune the behavior of artifacts using various options:
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+Defining Artifacts in `.gitlab-ci.yml`** You define artifacts in a job by using the `artifacts` keyword within the job configuration. You specify which files or directories should be preserved.
+### Basic Example: 
+
+
+```yaml
+stages:
+  - build
+  - test
+
+build_job:
+  stage: build
+  script:
+    - echo "Compiling the code"
+    - mkdir dist
+    - touch dist/my_app
+  artifacts:
+    paths:
+      - dist/
+
+test_job:
+  stage: test
+  script:
+    - echo "Running tests on the built app"
+    - ls dist/
+```
+
+#### In this example: 
+ 
+- **`build_job`** : This job compiles code and produces a file in the `dist/` directory. 
+  - The `artifacts` keyword specifies that everything in the `dist/` directory should be preserved as an artifact.
+ 
+- **`test_job`** : This job runs in the `test` stage and relies on the output (`dist/my_app`) from the `build_job`. Since the `dist/` directory was saved as an artifact, the `test_job` has access to the files created in the `build_job`.
+
+
+---
+
+**Artifact Configuration Options** 
+You can fine-tune the behavior of artifacts using various options:
+1. `paths`:** 
+The most common option, it defines the files or directories you want to save as artifacts.
+
+
+```yaml
+artifacts:
+  paths:
+    - dist/
+    - logs/output.log
+```
+This example saves the `dist/` directory and the `logs/output.log` file as artifacts.2. `expire_in`:** 
+By default, artifacts are kept indefinitely, but you can set an expiration time after which GitLab automatically removes them.
+
+
+```yaml
+artifacts:
+  paths:
+    - dist/
+  expire_in: 1 week
+```
+
+In this case, artifacts will expire after 1 week.
+3. `when`:** 
+You can control when artifacts are uploaded based on the job result:
+ 
+- `on_success`: Uploads artifacts only if the job succeeds (default behavior).
+ 
+- `on_failure`: Uploads artifacts only if the job fails (e.g., useful for saving logs or debugging information).
+ 
+- `always`: Uploads artifacts regardless of whether the job succeeds or fails.
+
+
+```yaml
+artifacts:
+  paths:
+    - logs/error.log
+  when: on_failure
+```
+In this case, the `error.log` will only be uploaded if the job fails.4. `name`:** 
+You can give a custom name to the artifact package (by default, it's named after the job).
+
+
+```yaml
+artifacts:
+  name: "my-build-artifacts"
+  paths:
+    - dist/
+```
+The artifacts will be saved as `my-build-artifacts.zip`.****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+Defining Artifacts in `.gitlab-ci.yml`** You define artifacts in a job by using the `artifacts` keyword within the job configuration. You specify which files or directories should be preserved.
+### Basic Example: 
+
+
+```yaml
+stages:
+  - build
+  - test
+
+build_job:
+  stage: build
+  script:
+    - echo "Compiling the code"
+    - mkdir dist
+    - touch dist/my_app
+  artifacts:
+    paths:
+      - dist/
+
+test_job:
+  stage: test
+  script:
+    - echo "Running tests on the built app"
+    - ls dist/
+```
+
+#### In this example: 
+ 
+- **`build_job`** : This job compiles code and produces a file in the `dist/` directory. 
+  - The `artifacts` keyword specifies that everything in the `dist/` directory should be preserved as an artifact.
+ 
+- **`test_job`** : This job runs in the `test` stage and relies on the output (`dist/my_app`) from the `build_job`. Since the `dist/` directory was saved as an artifact, the `test_job` has access to the files created in the `build_job`.
+
+
+---
+
+**Artifact Configuration Options** 
+You can fine-tune the behavior of artifacts using various options:
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+Defining Artifacts in `.gitlab-ci.yml`** You define artifacts in a job by using the `artifacts` keyword within the job configuration. You specify which files or directories should be preserved.
+### Basic Example: 
+
+
+```yaml
+stages:
+  - build
+  - test
+
+build_job:
+  stage: build
+  script:
+    - echo "Compiling the code"
+    - mkdir dist
+    - touch dist/my_app
+  artifacts:
+    paths:
+      - dist/
+
+test_job:
+  stage: test
+  script:
+    - echo "Running tests on the built app"
+    - ls dist/
+```
+
+#### In this example: 
+ 
+- **`build_job`** : This job compiles code and produces a file in the `dist/` directory. 
+  - The `artifacts` keyword specifies that everything in the `dist/` directory should be preserved as an artifact.
+ 
+- **`test_job`** : This job runs in the `test` stage and relies on the output (`dist/my_app`) from the `build_job`. Since the `dist/` directory was saved as an artifact, the `test_job` has access to the files created in the `build_job`.
+
+
+---
+
+**Artifact Configuration Options** 
+You can fine-tune the behavior of artifacts using various options:
+1. `paths`:** 
+The most common option, it defines the files or directories you want to save as artifacts.
+
+
+```yaml
+artifacts:
+  paths:
+    - dist/
+    - logs/output.log
+```
+This example saves the `dist/` directory and the `logs/output.log` file as artifacts.****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+Defining Artifacts in `.gitlab-ci.yml`** You define artifacts in a job by using the `artifacts` keyword within the job configuration. You specify which files or directories should be preserved.
+### Basic Example: 
+
+
+```yaml
+stages:
+  - build
+  - test
+
+build_job:
+  stage: build
+  script:
+    - echo "Compiling the code"
+    - mkdir dist
+    - touch dist/my_app
+  artifacts:
+    paths:
+      - dist/
+
+test_job:
+  stage: test
+  script:
+    - echo "Running tests on the built app"
+    - ls dist/
+```
+
+#### In this example: 
+ 
+- **`build_job`** : This job compiles code and produces a file in the `dist/` directory. 
+  - The `artifacts` keyword specifies that everything in the `dist/` directory should be preserved as an artifact.
+ 
+- **`test_job`** : This job runs in the `test` stage and relies on the output (`dist/my_app`) from the `build_job`. Since the `dist/` directory was saved as an artifact, the `test_job` has access to the files created in the `build_job`.
+
+
+---
+
+**Artifact Configuration Options** 
+You can fine-tune the behavior of artifacts using various options:
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+Defining Artifacts in `.gitlab-ci.yml`** You define artifacts in a job by using the `artifacts` keyword within the job configuration. You specify which files or directories should be preserved.
+### Basic Example: 
+
+
+```yaml
+stages:
+  - build
+  - test
+
+build_job:
+  stage: build
+  script:
+    - echo "Compiling the code"
+    - mkdir dist
+    - touch dist/my_app
+  artifacts:
+    paths:
+      - dist/
+
+test_job:
+  stage: test
+  script:
+    - echo "Running tests on the built app"
+    - ls dist/
+```
+
+#### In this example: 
+ 
+- **`build_job`** : This job compiles code and produces a file in the `dist/` directory. 
+  - The `artifacts` keyword specifies that everything in the `dist/` directory should be preserved as an artifact.
+ 
+- **`test_job`** : This job runs in the `test` stage and relies on the output (`dist/my_app`) from the `build_job`. Since the `dist/` directory was saved as an artifact, the `test_job` has access to the files created in the `build_job`.
+
+
+---
+
+**Artifact Configuration Options** 
+You can fine-tune the behavior of artifacts using various options:
+1. `paths`:** 
+The most common option, it defines the files or directories you want to save as artifacts.
+
+
+```yaml
+artifacts:
+  paths:
+    - dist/
+    - logs/output.log
+```
+This example saves the `dist/` directory and the `logs/output.log` file as artifacts.2. `expire_in`:** 
+By default, artifacts are kept indefinitely, but you can set an expiration time after which GitLab automatically removes them.
+
+
+```yaml
+artifacts:
+  paths:
+    - dist/
+  expire_in: 1 week
+```
+
+In this case, artifacts will expire after 1 week.
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+Defining Artifacts in `.gitlab-ci.yml`** You define artifacts in a job by using the `artifacts` keyword within the job configuration. You specify which files or directories should be preserved.
+### Basic Example: 
+
+
+```yaml
+stages:
+  - build
+  - test
+
+build_job:
+  stage: build
+  script:
+    - echo "Compiling the code"
+    - mkdir dist
+    - touch dist/my_app
+  artifacts:
+    paths:
+      - dist/
+
+test_job:
+  stage: test
+  script:
+    - echo "Running tests on the built app"
+    - ls dist/
+```
+
+#### In this example: 
+ 
+- **`build_job`** : This job compiles code and produces a file in the `dist/` directory. 
+  - The `artifacts` keyword specifies that everything in the `dist/` directory should be preserved as an artifact.
+ 
+- **`test_job`** : This job runs in the `test` stage and relies on the output (`dist/my_app`) from the `build_job`. Since the `dist/` directory was saved as an artifact, the `test_job` has access to the files created in the `build_job`.
+
+
+---
+
+**Artifact Configuration Options** 
+You can fine-tune the behavior of artifacts using various options:
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+Defining Artifacts in `.gitlab-ci.yml`** You define artifacts in a job by using the `artifacts` keyword within the job configuration. You specify which files or directories should be preserved.
+### Basic Example: 
+
+
+```yaml
+stages:
+  - build
+  - test
+
+build_job:
+  stage: build
+  script:
+    - echo "Compiling the code"
+    - mkdir dist
+    - touch dist/my_app
+  artifacts:
+    paths:
+      - dist/
+
+test_job:
+  stage: test
+  script:
+    - echo "Running tests on the built app"
+    - ls dist/
+```
+
+#### In this example: 
+ 
+- **`build_job`** : This job compiles code and produces a file in the `dist/` directory. 
+  - The `artifacts` keyword specifies that everything in the `dist/` directory should be preserved as an artifact.
+ 
+- **`test_job`** : This job runs in the `test` stage and relies on the output (`dist/my_app`) from the `build_job`. Since the `dist/` directory was saved as an artifact, the `test_job` has access to the files created in the `build_job`.
+
+
+---
+
+**Artifact Configuration Options** 
+You can fine-tune the behavior of artifacts using various options:
+1. `paths`:** 
+The most common option, it defines the files or directories you want to save as artifacts.
+
+
+```yaml
+artifacts:
+  paths:
+    - dist/
+    - logs/output.log
+```
+This example saves the `dist/` directory and the `logs/output.log` file as artifacts.****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+Defining Artifacts in `.gitlab-ci.yml`** You define artifacts in a job by using the `artifacts` keyword within the job configuration. You specify which files or directories should be preserved.
+### Basic Example: 
+
+
+```yaml
+stages:
+  - build
+  - test
+
+build_job:
+  stage: build
+  script:
+    - echo "Compiling the code"
+    - mkdir dist
+    - touch dist/my_app
+  artifacts:
+    paths:
+      - dist/
+
+test_job:
+  stage: test
+  script:
+    - echo "Running tests on the built app"
+    - ls dist/
+```
+
+#### In this example: 
+ 
+- **`build_job`** : This job compiles code and produces a file in the `dist/` directory. 
+  - The `artifacts` keyword specifies that everything in the `dist/` directory should be preserved as an artifact.
+ 
+- **`test_job`** : This job runs in the `test` stage and relies on the output (`dist/my_app`) from the `build_job`. Since the `dist/` directory was saved as an artifact, the `test_job` has access to the files created in the `build_job`.
+
+
+---
+
+**Artifact Configuration Options** 
+You can fine-tune the behavior of artifacts using various options:
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+Defining Artifacts in `.gitlab-ci.yml`** You define artifacts in a job by using the `artifacts` keyword within the job configuration. You specify which files or directories should be preserved.
+### Basic Example: 
+
+
+```yaml
+stages:
+  - build
+  - test
+
+build_job:
+  stage: build
+  script:
+    - echo "Compiling the code"
+    - mkdir dist
+    - touch dist/my_app
+  artifacts:
+    paths:
+      - dist/
+
+test_job:
+  stage: test
+  script:
+    - echo "Running tests on the built app"
+    - ls dist/
+```
+
+#### In this example: 
+ 
+- **`build_job`** : This job compiles code and produces a file in the `dist/` directory. 
+  - The `artifacts` keyword specifies that everything in the `dist/` directory should be preserved as an artifact.
+ 
+- **`test_job`** : This job runs in the `test` stage and relies on the output (`dist/my_app`) from the `build_job`. Since the `dist/` directory was saved as an artifact, the `test_job` has access to the files created in the `build_job`.
+
+
+---
+
+**Artifact Configuration Options** 
+You can fine-tune the behavior of artifacts using various options:
+1. `paths`:** 
+The most common option, it defines the files or directories you want to save as artifacts.
+
+
+```yaml
+artifacts:
+  paths:
+    - dist/
+    - logs/output.log
+```
+This example saves the `dist/` directory and the `logs/output.log` file as artifacts.2. `expire_in`:** 
+By default, artifacts are kept indefinitely, but you can set an expiration time after which GitLab automatically removes them.
+
+
+```yaml
+artifacts:
+  paths:
+    - dist/
+  expire_in: 1 week
+```
+
+In this case, artifacts will expire after 1 week.
+3. `when`:** 
+You can control when artifacts are uploaded based on the job result:
+ 
+- `on_success`: Uploads artifacts only if the job succeeds (default behavior).
+ 
+- `on_failure`: Uploads artifacts only if the job fails (e.g., useful for saving logs or debugging information).
+ 
+- `always`: Uploads artifacts regardless of whether the job succeeds or fails.
+
+
+```yaml
+artifacts:
+  paths:
+    - logs/error.log
+  when: on_failure
+```
+In this case, the `error.log` will only be uploaded if the job fails.****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+Defining Artifacts in `.gitlab-ci.yml`** You define artifacts in a job by using the `artifacts` keyword within the job configuration. You specify which files or directories should be preserved.
+### Basic Example: 
+
+
+```yaml
+stages:
+  - build
+  - test
+
+build_job:
+  stage: build
+  script:
+    - echo "Compiling the code"
+    - mkdir dist
+    - touch dist/my_app
+  artifacts:
+    paths:
+      - dist/
+
+test_job:
+  stage: test
+  script:
+    - echo "Running tests on the built app"
+    - ls dist/
+```
+
+#### In this example: 
+ 
+- **`build_job`** : This job compiles code and produces a file in the `dist/` directory. 
+  - The `artifacts` keyword specifies that everything in the `dist/` directory should be preserved as an artifact.
+ 
+- **`test_job`** : This job runs in the `test` stage and relies on the output (`dist/my_app`) from the `build_job`. Since the `dist/` directory was saved as an artifact, the `test_job` has access to the files created in the `build_job`.
+
+
+---
+
+**Artifact Configuration Options** 
+You can fine-tune the behavior of artifacts using various options:
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+Defining Artifacts in `.gitlab-ci.yml`** You define artifacts in a job by using the `artifacts` keyword within the job configuration. You specify which files or directories should be preserved.
+### Basic Example: 
+
+
+```yaml
+stages:
+  - build
+  - test
+
+build_job:
+  stage: build
+  script:
+    - echo "Compiling the code"
+    - mkdir dist
+    - touch dist/my_app
+  artifacts:
+    paths:
+      - dist/
+
+test_job:
+  stage: test
+  script:
+    - echo "Running tests on the built app"
+    - ls dist/
+```
+
+#### In this example: 
+ 
+- **`build_job`** : This job compiles code and produces a file in the `dist/` directory. 
+  - The `artifacts` keyword specifies that everything in the `dist/` directory should be preserved as an artifact.
+ 
+- **`test_job`** : This job runs in the `test` stage and relies on the output (`dist/my_app`) from the `build_job`. Since the `dist/` directory was saved as an artifact, the `test_job` has access to the files created in the `build_job`.
+
+
+---
+
+**Artifact Configuration Options** 
+You can fine-tune the behavior of artifacts using various options:
+1. `paths`:** 
+The most common option, it defines the files or directories you want to save as artifacts.
+
+
+```yaml
+artifacts:
+  paths:
+    - dist/
+    - logs/output.log
+```
+This example saves the `dist/` directory and the `logs/output.log` file as artifacts.****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+Defining Artifacts in `.gitlab-ci.yml`** You define artifacts in a job by using the `artifacts` keyword within the job configuration. You specify which files or directories should be preserved.
+### Basic Example: 
+
+
+```yaml
+stages:
+  - build
+  - test
+
+build_job:
+  stage: build
+  script:
+    - echo "Compiling the code"
+    - mkdir dist
+    - touch dist/my_app
+  artifacts:
+    paths:
+      - dist/
+
+test_job:
+  stage: test
+  script:
+    - echo "Running tests on the built app"
+    - ls dist/
+```
+
+#### In this example: 
+ 
+- **`build_job`** : This job compiles code and produces a file in the `dist/` directory. 
+  - The `artifacts` keyword specifies that everything in the `dist/` directory should be preserved as an artifact.
+ 
+- **`test_job`** : This job runs in the `test` stage and relies on the output (`dist/my_app`) from the `build_job`. Since the `dist/` directory was saved as an artifact, the `test_job` has access to the files created in the `build_job`.
+
+
+---
+
+**Artifact Configuration Options** 
+You can fine-tune the behavior of artifacts using various options:
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+Defining Artifacts in `.gitlab-ci.yml`** You define artifacts in a job by using the `artifacts` keyword within the job configuration. You specify which files or directories should be preserved.
+### Basic Example: 
+
+
+```yaml
+stages:
+  - build
+  - test
+
+build_job:
+  stage: build
+  script:
+    - echo "Compiling the code"
+    - mkdir dist
+    - touch dist/my_app
+  artifacts:
+    paths:
+      - dist/
+
+test_job:
+  stage: test
+  script:
+    - echo "Running tests on the built app"
+    - ls dist/
+```
+
+#### In this example: 
+ 
+- **`build_job`** : This job compiles code and produces a file in the `dist/` directory. 
+  - The `artifacts` keyword specifies that everything in the `dist/` directory should be preserved as an artifact.
+ 
+- **`test_job`** : This job runs in the `test` stage and relies on the output (`dist/my_app`) from the `build_job`. Since the `dist/` directory was saved as an artifact, the `test_job` has access to the files created in the `build_job`.
+
+
+---
+
+**Artifact Configuration Options** 
+You can fine-tune the behavior of artifacts using various options:
+1. `paths`:** 
+The most common option, it defines the files or directories you want to save as artifacts.
+
+
+```yaml
+artifacts:
+  paths:
+    - dist/
+    - logs/output.log
+```
+This example saves the `dist/` directory and the `logs/output.log` file as artifacts.2. `expire_in`:** 
+By default, artifacts are kept indefinitely, but you can set an expiration time after which GitLab automatically removes them.
+
+
+```yaml
+artifacts:
+  paths:
+    - dist/
+  expire_in: 1 week
+```
+
+In this case, artifacts will expire after 1 week.
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+Defining Artifacts in `.gitlab-ci.yml`** You define artifacts in a job by using the `artifacts` keyword within the job configuration. You specify which files or directories should be preserved.
+### Basic Example: 
+
+
+```yaml
+stages:
+  - build
+  - test
+
+build_job:
+  stage: build
+  script:
+    - echo "Compiling the code"
+    - mkdir dist
+    - touch dist/my_app
+  artifacts:
+    paths:
+      - dist/
+
+test_job:
+  stage: test
+  script:
+    - echo "Running tests on the built app"
+    - ls dist/
+```
+
+#### In this example: 
+ 
+- **`build_job`** : This job compiles code and produces a file in the `dist/` directory. 
+  - The `artifacts` keyword specifies that everything in the `dist/` directory should be preserved as an artifact.
+ 
+- **`test_job`** : This job runs in the `test` stage and relies on the output (`dist/my_app`) from the `build_job`. Since the `dist/` directory was saved as an artifact, the `test_job` has access to the files created in the `build_job`.
+
+
+---
+
+**Artifact Configuration Options** 
+You can fine-tune the behavior of artifacts using various options:
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+Defining Artifacts in `.gitlab-ci.yml`** You define artifacts in a job by using the `artifacts` keyword within the job configuration. You specify which files or directories should be preserved.
+### Basic Example: 
+
+
+```yaml
+stages:
+  - build
+  - test
+
+build_job:
+  stage: build
+  script:
+    - echo "Compiling the code"
+    - mkdir dist
+    - touch dist/my_app
+  artifacts:
+    paths:
+      - dist/
+
+test_job:
+  stage: test
+  script:
+    - echo "Running tests on the built app"
+    - ls dist/
+```
+
+#### In this example: 
+ 
+- **`build_job`** : This job compiles code and produces a file in the `dist/` directory. 
+  - The `artifacts` keyword specifies that everything in the `dist/` directory should be preserved as an artifact.
+ 
+- **`test_job`** : This job runs in the `test` stage and relies on the output (`dist/my_app`) from the `build_job`. Since the `dist/` directory was saved as an artifact, the `test_job` has access to the files created in the `build_job`.
+
+
+---
+
+**Artifact Configuration Options** 
+You can fine-tune the behavior of artifacts using various options:
+1. `paths`:** 
+The most common option, it defines the files or directories you want to save as artifacts.
+
+
+```yaml
+artifacts:
+  paths:
+    - dist/
+    - logs/output.log
+```
+This example saves the `dist/` directory and the `logs/output.log` file as artifacts.****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+Defining Artifacts in `.gitlab-ci.yml`** You define artifacts in a job by using the `artifacts` keyword within the job configuration. You specify which files or directories should be preserved.
+### Basic Example: 
+
+
+```yaml
+stages:
+  - build
+  - test
+
+build_job:
+  stage: build
+  script:
+    - echo "Compiling the code"
+    - mkdir dist
+    - touch dist/my_app
+  artifacts:
+    paths:
+      - dist/
+
+test_job:
+  stage: test
+  script:
+    - echo "Running tests on the built app"
+    - ls dist/
+```
+
+#### In this example: 
+ 
+- **`build_job`** : This job compiles code and produces a file in the `dist/` directory. 
+  - The `artifacts` keyword specifies that everything in the `dist/` directory should be preserved as an artifact.
+ 
+- **`test_job`** : This job runs in the `test` stage and relies on the output (`dist/my_app`) from the `build_job`. Since the `dist/` directory was saved as an artifact, the `test_job` has access to the files created in the `build_job`.
+
+
+---
+
+**Artifact Configuration Options** 
+You can fine-tune the behavior of artifacts using various options:
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+****Artifacts in GitLab CI Jobs** **Artifacts**  in GitLab CI/CD are the files or data produced during the execution of a job that you want to preserve and share between different jobs in the same pipeline. They allow you to save the outputs of your jobs (such as binaries, test results, logs, or reports) and make them available for download or for use in later stages of the pipeline.
+
+---
+
+**How Artifacts Work in GitLab CI**  
+1. **Job Execution** : When a job runs in the pipeline, it may generate files (e.g., compiled binaries, logs, or reports).
+ 
+2. **Artifacts Declaration** : You can declare these files as **artifacts**  in your `.gitlab-ci.yml` file, specifying which files should be preserved after the job completes.
+ 
+3. **Artifact Availability** : These artifacts are stored by GitLab and can be accessed by:
+  - Downloading them from the pipeline/job page in GitLab’s UI.
+
+  - Passing them to subsequent jobs in later stages.
+
+
+---
+
+**Key Use Cases for Artifacts**  
+- **Build Outputs** : When a `build` job generates an executable, you can save that executable as an artifact for a later `test` or `deploy` job to use.
+ 
+- **Test Reports** : If a `test` job generates logs or reports (e.g., code coverage or unit test results), you can save them as artifacts for review.
+ 
+- **Intermediate Files** : You can preserve intermediate files or dependencies that need to be used across multiple jobs or stages within a pipeline.
+ 
+- **Deployment Assets** : Artifacts can be used to pass built assets to the deployment stage.
+
+
+---
+
+Defining Artifacts in `.gitlab-ci.yml`** You define artifacts in a job by using the `artifacts` keyword within the job configuration. You specify which files or directories should be preserved.
+### Basic Example: 
+
+
+```yaml
+stages:
+  - build
+  - test
+
+build_job:
+  stage: build
+  script:
+    - echo "Compiling the code"
+    - mkdir dist
+    - touch dist/my_app
+  artifacts:
+    paths:
+      - dist/
+
+test_job:
+  stage: test
+  script:
+    - echo "Running tests on the built app"
+    - ls dist/
+```
+
+#### In this example: 
+ 
+- **`build_job`** : This job compiles code and produces a file in the `dist/` directory. 
+  - The `artifacts` keyword specifies that everything in the `dist/` directory should be preserved as an artifact.
+ 
+- **`test_job`** : This job runs in the `test` stage and relies on the output (`dist/my_app`) from the `build_job`. Since the `dist/` directory was saved as an artifact, the `test_job` has access to the files created in the `build_job`.
+
+
+---
+
+**Artifact Configuration Options** 
+You can fine-tune the behavior of artifacts using various options:
+1. `paths`:** 
+The most common option, it defines the files or directories you want to save as artifacts.
+
+
+```yaml
+artifacts:
+  paths:
+    - dist/
+    - logs/output.log
+```
+This example saves the `dist/` directory and the `logs/output.log` file as artifacts.2. `expire_in`:** 
+By default, artifacts are kept indefinitely, but you can set an expiration time after which GitLab automatically removes them.
+
+
+```yaml
+artifacts:
+  paths:
+    - dist/
+  expire_in: 1 week
+```
+
+In this case, artifacts will expire after 1 week.
+3. `when`:** 
+You can control when artifacts are uploaded based on the job result:
+ 
+- `on_success`: Uploads artifacts only if the job succeeds (default behavior).
+ 
+- `on_failure`: Uploads artifacts only if the job fails (e.g., useful for saving logs or debugging information).
+ 
+- `always`: Uploads artifacts regardless of whether the job succeeds or fails.
+
+
+```yaml
+artifacts:
+  paths:
+    - logs/error.log
+  when: on_failure
+```
+In this case, the `error.log` will only be uploaded if the job fails.4. `name`:** 
+You can give a custom name to the artifact package (by default, it's named after the job).
+
+
+```yaml
+artifacts:
+  name: "my-build-artifacts"
+  paths:
+    - dist/
+```
+The artifacts will be saved as `my-build-artifacts.zip`.5. `public`:** By default, artifacts are only available to users with access to the pipeline. You can make artifacts public by setting this option to `true`.
+
+---
+
+**Types of Artifacts**  
+1. **Regular Artifacts** : These are files generated and stored for later stages or manual download.
+ 
+2. **Reports** : Some artifacts, such as test reports, coverage reports, and security scanning reports, are presented in a specific format in GitLab’s UI for easier access.
+
+### Example of Test Reports as Artifacts: 
+
+
+```yaml
+test_job:
+  stage: test
+  script:
+    - pytest --junitxml=report.xml
+  artifacts:
+    reports:
+      junit: report.xml
+```
+Here, the test report `report.xml` is saved as an artifact and displayed in the GitLab pipeline’s test results section.
+
+---
+
+**Passing Artifacts Between Jobs** Artifacts can be passed between jobs, but this is typically done across different **stages**  (since jobs within the same stage run in parallel). For instance, if you have a `build` job that generates a compiled binary, you can pass that artifact to a later `deploy` job in the `deploy` stage.
+
+```yaml
+stages:
+  - build
+  - deploy
+
+build_job:
+  stage: build
+  script:
+    - make
+  artifacts:
+    paths:
+      - my_app
+
+deploy_job:
+  stage: deploy
+  script:
+    - ./deploy my_app
+```
+
+In this example:
+ 
+- **`build_job`**  produces the `my_app` file and saves it as an artifact.
+ 
+- **`deploy_job`**  runs in the next stage and uses the `my_app` file from the previous stage.
+
+
+---
+
+**Artifact Storage and Downloading**  
+- **Storage** : Artifacts are stored by GitLab, either in the instance’s file system or object storage (e.g., AWS S3).
+ 
+- **Downloading** : You can download artifacts from the GitLab web interface: 
+  - Go to a pipeline or job’s details page, and you’ll see a section where artifacts can be downloaded as `.zip` files.
+
+
+---
+
+**When to Use Artifacts?**  
+- **Build Artifacts** : Save the output of your build process (e.g., binaries, compiled code).
+ 
+- **Testing Logs** : Save logs or test reports that might be needed for debugging.
+ 
+- **Intermediate Outputs** : Pass outputs from one stage (like build) to another (like deploy).
+ 
+- **Reports and Metrics** : Save and visualize reports (e.g., JUnit test results, code coverage reports).
+
+
+---
+
+**Artifacts vs. Caches** GitLab CI also offers **caching** , which is similar to artifacts but is used to store dependencies and files that don’t change often (like libraries, packages, or modules). Here’s how they differ: 
+- **Artifacts** : Used to save and pass files between jobs (especially across stages). They are typically short-lived and job-specific.
+ 
+- **Caches** : Used to speed up job execution by reusing downloaded dependencies or build results across multiple pipeline runs. Caches are typically used for speeding up build times rather than for passing data between stages.
+
+### Summary 
+
+- Artifacts allow you to save and transfer files generated during the job execution, such as build outputs, logs, and reports.
+ 
+- You can define artifacts in `.gitlab-ci.yml` using the `artifacts` keyword, specifying the files or directories to be preserved.
+
+- Artifacts can be passed between jobs in different stages and can be customized (e.g., when they are uploaded, how long they persist).
+
+- They are particularly useful for sharing data between jobs and reviewing the results of jobs, such as build outputs or test results.
